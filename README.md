@@ -1,51 +1,183 @@
-# SmartRobot
-This project addresses the challenges of maintaining large-scale farms that use tractors and heavy machinery, which often damage irrigation water pipes. The solution is an autonomous robot that ensures efficient irrigation without water pipes, preventing infrastructure damage and ensuring consistent water distribution.
+# 🍅 TomatoScan  
+### Mobile Tomato Disease Detection using Deep Learning & Machine Learning
+
+<img width="1380" height="752" alt="Gemini_Generated_Image_h4dg4ah4dg4ah4dg" src="https://github.com/user-attachments/assets/0796abda-b2f5-4dfe-9587-dc801471efcc" />
+
+---
+
+## 📌 Overview
+TomatoScan is an end-to-end computer vision system that classifies **10 tomato leaf conditions (9 diseases + 1 healthy class)** using deep learning models and deploys the best-performing model to **Android via TensorFlow Lite (TFLite)** for fully offline inference.
+
+The system benchmarks multiple architectures including **VGG16, InceptionV3, ResNet50, and a custom CNN**, and compares them against classical machine learning models using ensemble stacking.
+
+---
+
+## 🚨 Problem Statement
+Tomato crop diseases cause major yield losses for farmers, especially in remote areas without access to agricultural experts or stable internet connectivity.
+
+**Goal:** Build an accurate, fast, and offline disease detection system that works directly from a smartphone camera.
+
+---
+
+## 🎯 Objectives
+- Train deep learning models for 10-class tomato disease classification
+- Benchmark multiple CNN architectures (VGG16, InceptionV3, ResNet50, Custom CNN)
+- Evaluate classical ML models using CNN feature extraction (stacking approach)
+- Deploy best model to Android using TensorFlow Lite
+- Achieve ≥90% accuracy on test dataset
+
+---
+
+## 📊 Dataset
+- **Name:** PlantVillage Tomato Leaf Dataset (Kaggle)
+- **Size:** ~11,000 images
+- **Classes:** 10 (9 diseases + 1 healthy)
+- **Format:** RGB images resized to 128×128
+- **Source:** https://www.kaggle.com/datasets/ashishmotwani/tomato
+
+---
+
+## 🧠 Methodology
+
+### 🔹 Deep Learning Models
+- VGG16 (Best performing)
+- InceptionV3
+- ResNet50
+- Custom CNN
+
+All models use:
+- Transfer learning (ImageNet weights)
+- GlobalAveragePooling2D
+- Dense(120, ReLU)
+- Dense(10, Softmax)
+
+---
+
+### 🔹 Ensemble Machine Learning
+CNN feature extraction + classical ML classifiers:
+- Random Forest
+- SVM
+- KNN
+- Logistic Regression
+- Naive Bayes
+- Decision Tree
+
+---
+
+### 🔹 Training Configuration
+- Optimizer: Adam (lr = 0.0001)
+- Loss: Categorical Crossentropy
+- Batch size: 32
+- Epochs: 20
+- Early stopping on validation loss
+
+---
+
+## 🏆 Results
+
+| Model         | Accuracy | F1 Score |
+|--------------|----------|----------|
+| VGG16        | **94.0%** | **0.94** |
+| InceptionV3  | 93.7%    | 0.929    |
+| ResNet50     | 93.1%    | 0.921    |
+| Custom CNN   | 84.9%    | 0.843    |
+
+### 🔍 Key Insights
+- VGG16 provides best trade-off between accuracy and model size
+- Transfer learning significantly outperforms ensemble stacking (~94% vs ~76%)
+- Leaf diseases with similar visual patterns (e.g., Early Blight vs Septoria) are most difficult to classify
+- TFLite quantization reduces model size significantly with minimal accuracy loss
+
+---
+
+## 📱 Android Deployment
+- Framework: Jetpack Compose
+- Camera: CameraX
+- Inference: TensorFlow Lite (offline)
+- Features:
+  - Real-time camera classification
+  - Gallery image classification
+  - Top-3 predictions
+  - Confidence score visualization
+  - Disease information cards
+  <td><img src="https://github.com/user-attachments/assets/11aecba9-615f-4c04-b0fa-797b0f13811a" width="200"/></td>
+  <td><img src="https://github.com/user-attachments/assets/42aeed23-e033-4aad-9f71-877198f86a23" width="200"/></td>
+  <td><img src="https://github.com/user-attachments/assets/11b51f97-0bd3-4bdc-a187-bf42bcf0121d" width="200"/></td>
 
 
-# Features
-- Android Studio App: Customized application to display real-time temperature and historical graphs for humidity, temperature, and soil moisture variables.
-- Firebase Integration: Stores data sent by ESP32 devices. The data is overwritten with each new value sent.
-- ESP32 Communication: Uses two ESP32 devices that communicate to send and receive signals from real-time conditions.
-# Technologies Used
-- ESP32 IoT: For real-time data collection and communication.
-- Firebase: For storing and retrieving data.
-- Android Studio: For developing the mobile application.
-# How It Works
-- Data Collection: The project begins with a stationary ESP32 that sends data to Firebase when there is low soil moisture or low humidity.
-- Data Reception: An ESP32 located on the robot receives data from Firebase and starts to move towards the location.
-- Navigation and Detection: The robot is guided by a line-following parameter and can detect the pot using a color sensor located beneath the robot.
-# Documentation & mobile application images
+---
 
-For a comprehensive demonstration of the Smart-Aquarium in action, please watch the [Video Demonstration]().
+## ⚙️ Tech Stack
+- Python 3.10
+- TensorFlow / Keras
+- Scikit-learn
+- OpenCV
+- NumPy
+- Pandas
+- TensorFlow Lite
+- Kotlin
+- Jetpack Compose
+- CameraX
 
-![Screenshot 2024-05-27 191340](https://github.com/RaphaelNazareth/Farm-Robot/assets/86475236/0f248f23-bd08-404b-8b2a-7a2b81adcd81)
+---
 
+## 📁 Project Structure
+  app/ → Android application (MainActivity, UI, CameraX)
+  models/ → Trained .tflite models (VGG16, InceptionV3, ResNet50)
+  notebook/ → Training & evaluation pipeline (Jupyter Notebook)
+  utils/ → TFLite inference wrapper (ClassifierEngine.kt)
+  assets/ → Active model + labels file
 
-*image: first page of the application*
+## 🚀 Installation & Usage
 
-![Screenshot 2024-05-27 191411](https://github.com/RaphaelNazareth/Farm-Robot/assets/86475236/3271c836-c051-4879-b4f6-55a21e531e94)
+### 1. Clone Repository
 
+bash
+git clone https://github.com/RaphaelNazareth/tomatoscan
+cd tomatoscan
 
-*image: interactable login page with local database*
+### 2. Install Python Dependencies
+pip install tensorflow scikit-learn opencv-python matplotlib pandas
+### 3. Run Training Notebook
 
-![Screenshot 2024-05-27 191455](https://github.com/RaphaelNazareth/Farm-Robot/assets/86475236/cc6c2ee1-ace5-4117-8ebb-147151a7a4cb)
+Open:
 
-*image: homepage for monitoring sensors & interactable circular progress bar*
+Mobile_Tomato_Disease_Detection_using_CNN___ML.ipynb
 
-![Screenshot 2024-05-27 191741](https://github.com/RaphaelNazareth/Farm-Robot/assets/86475236/6b7653a3-4a45-4514-8867-6cd461817aaf)
+Run all cells sequentially.
 
-*image: Temperature page with historical graph and Circular Progress Bar *
+### 4. Android Setup
+./gradlew installDebug
 
-![Screenshot 2024-05-27 191810](https://github.com/RaphaelNazareth/Farm-Robot/assets/86475236/02531bfb-a09d-42fc-90a4-b5573f2049af)
+Steps:
 
-*image: Soil moisture page with historical graph and Circular Progress Bar *
+Open project in Android Studio
+Place .tflite model into:
+android/app/src/main/assets/
+Run on device or emulator
 
-![Screenshot 2024-05-27 191832](https://github.com/RaphaelNazareth/Farm-Robot/assets/86475236/aa436891-7426-4572-b1a0-0a2d1ec70ad5)
+## 📈 Key Findings & 🔮 Future Improvements
 
-*image: Humidity page with historical graph and Circular Progress Bar *
+### 📈 Key Findings
+- Transfer learning converges very quickly (3–5 epochs), making training efficient even on limited compute resources  
+- VGG16 performs best at 128×128 resolution, offering the best balance between accuracy and model size  
+- Classical ensemble ML methods underperform due to limited feature expressiveness compared to end-to-end CNN learning  
+- Early Blight vs Septoria Leaf Spot remains the most challenging classification pair due to high visual similarity  
+- Model quantization significantly reduces model size, enabling deployment on low-end mobile devices with minimal accuracy loss  
 
-![WhatsApp Image 2024-05-30 at 22 17 01_b6b6b667](https://github.com/RaphaelNazareth/Farm-Robot/assets/86475236/e3851712-a1a2-40ff-9f37-d9899cd98f83)
+---
 
-*image: application in real phone *
+### 🔮 Future Improvements
+- Replace backbone models with **MobileNetV3 / EfficientNet-Lite** for smaller and more efficient deployment  
+- Add **Grad-CAM visualization** to improve model interpretability and highlight affected leaf regions  
+- Implement **disease severity estimation** (mild / moderate / severe) based on lesion coverage  
+- Add **multi-language support** (Bahasa Indonesia, English, Spanish) for broader accessibility  
+- Enable **crowdsourced dataset collection** directly from the mobile app to continuously improve the model  
+- Provide optional **cloud inference fallback API** using FastAPI / Flask for low-end or unsupported devices  
 
-[Return to top](https://github.com/RaphaelNazareth/FarmRobot)
+---
+
+## 👨‍💻 Author
+
+**Raphael Nazareth**  
+Computer Engineering | IoT & Machine Learning Enthusiast
