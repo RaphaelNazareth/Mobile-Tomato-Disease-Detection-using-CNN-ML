@@ -116,3 +116,62 @@ CNN feature extraction + classical ML classifiers:
 ---
 
 ## 📁 Project Structure
+  app/ → Android application (MainActivity, UI, CameraX)
+  models/ → Trained .tflite models (VGG16, InceptionV3, ResNet50)
+  notebook/ → Training & evaluation pipeline (Jupyter Notebook)
+  utils/ → TFLite inference wrapper (ClassifierEngine.kt)
+  assets/ → Active model + labels file
+
+## 🚀 Installation & Usage
+
+### 1. Clone Repository
+
+bash
+git clone https://github.com/RaphaelNazareth/tomatoscan
+cd tomatoscan
+
+### 2. Install Python Dependencies
+pip install tensorflow scikit-learn opencv-python matplotlib pandas
+### 3. Run Training Notebook
+
+Open:
+
+Mobile_Tomato_Disease_Detection_using_CNN___ML.ipynb
+
+Run all cells sequentially.
+
+### 4. Android Setup
+./gradlew installDebug
+
+Steps:
+
+Open project in Android Studio
+Place .tflite model into:
+android/app/src/main/assets/
+Run on device or emulator
+
+## 📈 Key Findings & 🔮 Future Improvements
+
+### 📈 Key Findings
+- Transfer learning converges very quickly (3–5 epochs), making training efficient even on limited compute resources  
+- VGG16 performs best at 128×128 resolution, offering the best balance between accuracy and model size  
+- Classical ensemble ML methods underperform due to limited feature expressiveness compared to end-to-end CNN learning  
+- Early Blight vs Septoria Leaf Spot remains the most challenging classification pair due to high visual similarity  
+- Model quantization significantly reduces model size, enabling deployment on low-end mobile devices with minimal accuracy loss  
+
+---
+
+### 🔮 Future Improvements
+- Replace backbone models with **MobileNetV3 / EfficientNet-Lite** for smaller and more efficient deployment  
+- Add **Grad-CAM visualization** to improve model interpretability and highlight affected leaf regions  
+- Implement **disease severity estimation** (mild / moderate / severe) based on lesion coverage  
+- Add **multi-language support** (Bahasa Indonesia, English, Spanish) for broader accessibility  
+- Enable **crowdsourced dataset collection** directly from the mobile app to continuously improve the model  
+- Provide optional **cloud inference fallback API** using FastAPI / Flask for low-end or unsupported devices  
+
+---
+
+## 👨‍💻 Author
+
+**Raphael Nazareth**  
+Computer Engineering | IoT & Machine Learning Enthusiast
