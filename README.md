@@ -100,6 +100,8 @@ CNN feature extraction + classical ML classifiers:
   - Top-3 predictions
   - Confidence score visualization
   - Disease information cards
+<img width="295" height="585" alt="image" src="https://github.com/user-attachments/assets/11aecba9-615f-4c04-b0fa-797b0f13811a" />
+<img width="297" height="601" alt="image" src="https://github.com/user-attachments/assets/42aeed23-e033-4aad-9f71-877198f86a23" />
 
 ---
 
