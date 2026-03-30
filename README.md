@@ -1,7 +1,7 @@
 # 🍅 TomatoScan  
 ### Mobile Tomato Disease Detection using Deep Learning & Machine Learning
 
-<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/b66a6c9e-5b24-418c-840d-cd5690b81f6d" />
+<img width="1408" height="768" alt="Gemini_Generated_Image_pebu79pebu79pebu" src="https://github.com/user-attachments/assets/02b4b626-10d6-4a66-83c0-a30500da6978" />
 
 
 ---
